@@ -62,10 +62,11 @@ namespace SpaceApps.Models.CleanData
             Agency = new Agency(DirtyLaunch.lsp);
             Location = new Location(DirtyLaunch.location);
             Rocket = new Rocket(DirtyLaunch.rocket);
-            foreach (var item in DirtyLaunch.missions)
-            {
-                Missions.Add(new Mission(item));
-            }
+            Missions = new List<Mission>();
+
+            if (DirtyLaunch.missions != null)
+                foreach (var item in DirtyLaunch.missions)
+                    Missions.Add(new Mission(item));
         }
     }
 
@@ -84,7 +85,7 @@ namespace SpaceApps.Models.CleanData
             name = DirtyAgency.name;
             InfoURL = DirtyAgency.infoURL;
             WikiURL = DirtyAgency.wikiURL;
-            InfoURLs = DirtyAgency.infoURLs;
+            InfoURLs = (DirtyAgency?.infoURLs == null) ? new string[0] : DirtyAgency.infoURLs;
         }
     }
 
@@ -104,18 +105,19 @@ namespace SpaceApps.Models.CleanData
             Launch = DirtyMission.launch;
             Type = DirtyMission.type;
             TypeName = DirtyMission.typeName;
+
+            Agencies = new List<Agency>();
             foreach (var item in DirtyMission.agencies)
-            {
                 Agencies.Add(new Agency(item));
-            }
+
+            PayLoads = new List<PayLoad>();
             foreach (var item in DirtyMission.payloads)
-            {
                 PayLoads.Add(new PayLoad(item));
-            }
-            foreach (var item in DirtyMission.events)
-            {
-                MissionEvents.Add(new MissionEvent(item));
-            }
+
+            MissionEvents = new List<MissionEvent>();
+            if (DirtyMission?.events != null)
+                foreach (var item in DirtyMission.events)
+                    MissionEvents.Add(new MissionEvent(item));
         }
     }
 
@@ -166,11 +168,16 @@ namespace SpaceApps.Models.CleanData
 
         public RocketFamily(SpaceApps.Models.RawData.RocketFamily DirtyRocketfamily)
         {
-            name = DirtyRocketfamily.name;
-            id = DirtyRocketfamily.id;
-            for (int i = 0; i < DirtyRocketfamily.agencies.Length; i++)
+            if (DirtyRocketfamily == null)
             {
-                agencies.Add(new Agency(DirtyRocketfamily.agencies[i]));
+
+            }
+            else
+            {
+                name = DirtyRocketfamily.name;
+                id = DirtyRocketfamily.id;
+                for (int i = 0; i < DirtyRocketfamily.agencies.Length; i++)
+                    agencies.Add(new Agency(DirtyRocketfamily.agencies[i]));
             }
         }
     }
@@ -183,10 +190,11 @@ namespace SpaceApps.Models.CleanData
         public Location(SpaceApps.Models.RawData.Location DirtyLocation)
         {
             CountryCode = DirtyLocation.countrycode;
+
+            Pads = new List<Pad>();
             foreach (var item in DirtyLocation.pads)
-            {
                 Pads.Add(new CleanData.Pad(item));
-            }
+
             name = DirtyLocation.name;
             id = DirtyLocation.id;
             InfoURL = DirtyLocation.infoURL;
@@ -223,8 +231,8 @@ namespace SpaceApps.Models.CleanData
     public class Pad : URLObject
     {
         public double Latitude { get; set; }
-        public double Longitude {get; set;}
-        public string MapURL {get; set;}
+        public double Longitude { get; set; }
+        public string MapURL { get; set; }
         public string Retired { get; set; }
         public int LocationId { get; set; }
         public List<Agency> Agencies { get; set; }
@@ -236,10 +244,10 @@ namespace SpaceApps.Models.CleanData
             MapURL = dirtyPad.mapURL;
             Retired = dirtyPad.retired.ToString();
             LocationId = dirtyPad.locationid;
+
+            Agencies = new List<Agency>();
             foreach (var item in dirtyPad.agencies)
-            {
                 Agencies.Add(new Agency(item));
-            }
         }
     }
 
