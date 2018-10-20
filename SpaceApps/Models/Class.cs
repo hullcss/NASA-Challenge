@@ -14,6 +14,7 @@ namespace SpaceApps.Models.RawData
         public string infoURL { get; set; }
         public string[] infoURLs { get; set; }
         public string changed { get; set; }
+        public Pad pad { get; set; }
     }
 
     public class Rocket
@@ -47,7 +48,7 @@ namespace SpaceApps.Models.RawData
         public string countyCode { get; set; }
         public string wikiURL { get; set; }
         public string[] infoURLs { get; set; }
-        public int islsp { get; set; } //0 = yes 1 = no
+        public int islsp { get; set; } //0 = no 1 = yes
         public string changed { get; set; }
     }
 
@@ -90,6 +91,23 @@ namespace SpaceApps.Models.RawData
         public string weight { get; set; } //in kg
         public int total { get; set; }
         public string missionID { get; set; }
+        public string changed { get; set; }
+    }
+
+    public class Pad
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public int padType { get; set; } //0 - launch 1 = landing
+        public string lattitude { get; set; }
+        public string longitude { get; set; }
+        public string mapURL { get; set; }
+        public int retired { get; set; }
+        public int locationid { get; set; }
+        public Agency[] agencies { get; set; }
+        public string wikiURL { get; set; }
+        public string infoURL { get; set; }
+        public string[] infoURLS { get; set; }
         public string changed { get; set; }
     }
 }
