@@ -35,3 +35,56 @@ body {
         display: none;
     }
 }
+
+body {
+    background-color: #DAD6D6;
+}
+
+.logo {
+    width: 60%;
+    max-width: 600px;
+}
+
+.navbar {
+    background-color: #413c58;
+    border-color: #413c58;
+}
+
+.navbar-nav {
+    float: right;
+}
+
+.body-content {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.navbar-brand {
+    width: 90%;
+    height: auto;
+    max-width: 300px;
+}
+
+.navbar-header {
+    max-width: 400px;
+    max-height: 500px;
+}
+
+.navbar-nav {
+    margin-top: 40px;
+}
+
+a {
+    color: #80DED9 !important;
+    transition-duration: 1.5s;
+}
+
+.navbar-nav {
+    margin-top: 30px;
+}
+
+li:hover {
+    background-color: #574f75;
+    transition-duration: 1.5s;
+}
