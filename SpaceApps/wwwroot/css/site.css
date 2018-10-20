@@ -6,7 +6,6 @@ for details on configuring this project to bundle and minify static web assets. 
 
 body {
     padding-top: 50px;
-    padding-bottom: 20px;
 }
 
 /* Wrapping element */
@@ -91,4 +90,19 @@ a {
 li:hover {
     background-color: #574f75;
     transition-duration: 1.5s;
+}
+
+footer {
+    background-color: #413b59;
+    color: #fff;
+    font-family: 'space mono';
+    text-align: center;
+    padding: 20px;
+    bottom: 0px !important;
+    padding-top: 40px;
+    font-size: 10px;
+}
+
+footer a {
+    color: #f5f5f5 !important;
 }
