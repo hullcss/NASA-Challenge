@@ -52,7 +52,7 @@ namespace SpaceApps.Models.RawData
         public string changed { get; set; }
     }
 
-    public class Missions
+    public class Mission
     {
         public int id { get; set; }
         public string name { get; set; }

@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 
 namespace SpaceApps.Models.RawData
 {
+    public class Launches
+    {
+        public Launch[] launches { get; set; }
+    }
+
     public class Launch
     {
         public int id { get; set; }
@@ -30,10 +35,10 @@ namespace SpaceApps.Models.RawData
         public string failreason { get; set; }
         public int probability { get; set; }
         public string hashtag { get; set; }
-        public int lsp { get; set; }
+        public dynamic lsp { get; set; }
         public string changed { get; set; }
         public dynamic location { get; set; }
-        public dynamic rocket { get; set; }
+        public Rocket rocket { get; set; }
         public dynamic missions { get; set; }
     }
 }
