@@ -178,12 +178,15 @@ namespace SpaceApps.Models.CleanData
     public class Location : URLObject
     {
         public string CountryCode { get; set; }
-        public Pad Pad { get; set; }
+        public List<Pad> Pads { get; set; }
 
         public Location(SpaceApps.Models.RawData.Location DirtyLocation)
         {
             CountryCode = DirtyLocation.countrycode;
-            Pad = new Pad(DirtyLocation.pad);
+            foreach (var item in DirtyLocation.pads)
+            {
+                Pads.Add(new CleanData.Pad(item));
+            }
             name = DirtyLocation.name;
             id = DirtyLocation.id;
             InfoURL = DirtyLocation.infoURL;
@@ -230,8 +233,8 @@ namespace SpaceApps.Models.CleanData
         {
             Latitude = double.Parse(dirtyPad.latitude.ToString());
             Longitude = double.Parse(dirtyPad.longitude.ToString());
-            MapURL = MapURL;
-            Retired = Retired.ToString();
+            MapURL = dirtyPad.mapURL;
+            Retired = dirtyPad.retired.ToString();
             LocationId = dirtyPad.locationid;
             foreach (var item in dirtyPad.agencies)
             {
