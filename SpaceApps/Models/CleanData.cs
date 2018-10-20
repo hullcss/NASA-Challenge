@@ -78,14 +78,17 @@ namespace SpaceApps.Models.CleanData
 
         public Agency(SpaceApps.Models.RawData.Agency DirtyAgency)
         {
-            Abbreviation = DirtyAgency.abbrev;
-            Type = DirtyAgency.type;
-            CountryCode = DirtyAgency.countyCode;
-            id = DirtyAgency.id;
-            name = DirtyAgency.name;
-            InfoURL = DirtyAgency.infoURL;
-            WikiURL = DirtyAgency.wikiURL;
-            InfoURLs = (DirtyAgency?.infoURLs == null) ? new string[0] : DirtyAgency.infoURLs;
+            if (DirtyAgency != null)
+            {
+                Abbreviation = DirtyAgency.abbrev;
+                Type = DirtyAgency.type;
+                CountryCode = DirtyAgency.countyCode;
+                id = DirtyAgency.id;
+                name = DirtyAgency.name;
+                InfoURL = DirtyAgency.infoURL;
+                WikiURL = DirtyAgency.wikiURL;
+                InfoURLs = (DirtyAgency?.infoURLs == null) ? new string[0] : DirtyAgency.infoURLs;
+            }
         }
     }
 
@@ -107,11 +110,13 @@ namespace SpaceApps.Models.CleanData
             TypeName = DirtyMission.typeName;
 
             Agencies = new List<Agency>();
-            foreach (var item in DirtyMission.agencies)
-                Agencies.Add(new Agency(item));
+            if (DirtyMission.agencies != null)
+                foreach (var item in DirtyMission.agencies)
+                    Agencies.Add(new Agency(item));
 
             PayLoads = new List<PayLoad>();
-            foreach (var item in DirtyMission.payloads)
+            if (DirtyMission.payloads != null)
+                foreach (var item in DirtyMission.payloads)
                 PayLoads.Add(new PayLoad(item));
 
             MissionEvents = new List<MissionEvent>();
@@ -246,8 +251,9 @@ namespace SpaceApps.Models.CleanData
             LocationId = dirtyPad.locationid;
 
             Agencies = new List<Agency>();
-            foreach (var item in dirtyPad.agencies)
-                Agencies.Add(new Agency(item));
+            if (dirtyPad.agencies != null)
+                foreach (var item in dirtyPad.agencies)
+                    Agencies.Add(new Agency(item));
         }
     }
 
