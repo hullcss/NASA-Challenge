@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace SpaceApps.Controllers.RawData
 {
     [Route("api/[controller]")]
-    public class LaunchController : Controller
+    public class DELETEMEController : Controller
     {
         [HttpGet]
         public async Task<IActionResult> Get()

@@ -17,7 +17,7 @@ namespace SpaceApps
             CreateWebHostBuilder(args).Build().Run();
 
 
-            Controllers.RawData.LaunchController test = new Controllers.RawData.LaunchController();
+            Controllers.RawData.DELETEMEController test = new Controllers.RawData.DELETEMEController();
             var x =  test.Get();
             
 
