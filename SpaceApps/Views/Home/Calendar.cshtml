@@ -15,7 +15,6 @@
     <title>Bootstrap 101 Template</title>
 
     <!-- CSS Includes -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css">
 
     <style type="text/css">
@@ -27,20 +26,25 @@
 </head>
 
 <body>
-    <div class="container">
-        <div id='calendar'></div>
-    </div>
+    <div class="grid-100">
 
-    <!-- JS includes -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <div class='launchText'>Calendar</div><br />
+        </div>
 
-    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
+        <div class="container grid-100">
+            <div id='calendar'></div>
+        </div>
 
-    <script type="text/javascript">
+        <!-- JS includes -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
+
+        <script type="text/javascript">
 
             $(document).ready(function () {
                 $('#calendar').fullCalendar({
@@ -54,6 +58,6 @@
                     events: '@Url.RouteUrl(new{ action="GetEvents", controller="Home"})'
                 });
             });
-    </script>
+        </script>
 </body>
 </html>
