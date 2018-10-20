@@ -8,7 +8,7 @@ namespace SpaceApps.Models.RawData
     public class Location : URLObject
     {
         public string countrycode { get; set; }
-        public Pad pad { get; set; }
+        public List<Pad> pads { get; set; }
     }
 
     public class Rocket : URLObject
@@ -66,6 +66,7 @@ namespace SpaceApps.Models.RawData
     public class Pad : URLObject
     {
         public int padType { get; set; } //0 - launch 1 = landing
+        public string name { get; set; }
         public string lattitude { get; set; }
         public string longitude { get; set; }
         public string mapURL { get; set; }

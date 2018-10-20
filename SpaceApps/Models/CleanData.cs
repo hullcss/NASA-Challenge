@@ -71,7 +71,4 @@ namespace SpaceApps.Models.CleanData
         public int Total { get; set; }
         public string MissionsID { get; set; }
     }
-
-
-
 }
