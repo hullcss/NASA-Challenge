@@ -59,13 +59,16 @@ namespace SpaceApps.Models.RawData
         public string description { get; set; }
         public int launch { get; set; }
         public int type { get; set; }
-        public string wikiURl { get; set; }
+
+        public string wikiURL { get; set; }
+        public string typeName { get; set; }
         public string infoURL { get; set; }
         public string changed { get; set; }
         public string[] infoURLs { get; set; }
-        public Agency[] agancies { get; set; }
-        public MissionEvent[] events { get; set; }
-        public Payload[] payloads { get; set; }
+        public dynamic[] agencies { get; set; }
+        public dynamic[] events { get; set; }
+        public dynamic[] payloads { get; set; }
+        public dynamic[] lsp { get; set; }
     }
 
     public class MissionEvent
@@ -104,7 +107,7 @@ namespace SpaceApps.Models.RawData
         public string mapURL { get; set; }
         public int retired { get; set; }
         public int locationid { get; set; }
-        public Agency[] agencies { get; set; }
+        public dynamic[] agencies { get; set; }
         public string wikiURL { get; set; }
         public string infoURL { get; set; }
         public string[] infoURLS { get; set; }
