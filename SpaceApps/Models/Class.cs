@@ -110,4 +110,14 @@ namespace SpaceApps.Models.RawData
         public string[] infoURLS { get; set; }
         public string changed { get; set; }
     }
+
+    public class lsp : Agency
+    {
+
+    }
+
+    public class BaseObject
+    {
+
+    }
 }
