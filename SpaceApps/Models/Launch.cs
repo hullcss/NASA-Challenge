@@ -7,7 +7,7 @@ namespace SpaceApps.Models.RawData
 {
     public class Launches
     {
-        public Launch[] launches { get; set; }
+        public List<Launch> launches { get; set; }
     }
 
     public class Launch

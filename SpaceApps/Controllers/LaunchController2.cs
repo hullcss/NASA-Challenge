@@ -24,6 +24,17 @@ namespace SpaceApps.Controllers
             return Ok(Launches);
         }
 
+        [Route("Grab")]
+        public async Task<IActionResult> Grab(int id)
+        {
+            var searchedObject = Launches.launches.FirstOrDefault(x => x.id == id);
+            if(searchedObject == new Models.RawData.Launch())
+            {
+                return NotFound("Id Not Found");
+            }
+            return Ok(searchedObject);
+        }
+
         static async Task<Models.RawData.Launches> doTheScrape()
         {
             using (var client = new HttpClient())
