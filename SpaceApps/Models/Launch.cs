@@ -35,10 +35,10 @@ namespace SpaceApps.Models.RawData
         public string failreason { get; set; }
         public int probability { get; set; }
         public string hashtag { get; set; }
-        public dynamic lsp { get; set; }
+        public lsp lsp { get; set; }
         public string changed { get; set; }
         public Location location { get; set; }
         public Rocket rocket { get; set; }
-        public Mission missions { get; set; }
+        public List<Mission> missions { get; set; }
     }
 }

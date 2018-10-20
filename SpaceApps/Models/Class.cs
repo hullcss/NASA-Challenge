@@ -37,10 +37,10 @@ namespace SpaceApps.Models.RawData
         public string description { get; set; }
         public int launch { get; set; }
         public int type { get; set; }
-        public string wikiURl { get; set; }
-        public Agency[] agancies { get; set; }
-        public MissionEvent[] events { get; set; }
-        public Payload[] payloads { get; set; }
+        public string typeName { get; set; }
+        public List<dynamic> agencies { get; set; }
+        public dynamic[] events { get; set; }
+        public List<dynamic> payloads { get; set; }
     }
 
     public class MissionEvent : BaseObject
