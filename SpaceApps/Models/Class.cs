@@ -66,8 +66,7 @@ namespace SpaceApps.Models.RawData
     public class Pad : URLObject
     {
         public int padType { get; set; } //0 - launch 1 = landing
-        public string name { get; set; }
-        public string lattitude { get; set; }
+        public string latitude { get; set; }
         public string longitude { get; set; }
         public string mapURL { get; set; }
         public int retired { get; set; }

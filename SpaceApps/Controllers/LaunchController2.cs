@@ -24,14 +24,14 @@ namespace SpaceApps.Controllers
             List<Models.CleanData.HarrysClass> datas = new List<Models.CleanData.HarrysClass>();
             foreach (var item in Launches.launches)
             {
-                    datas.Add(new Models.CleanData.HarrysClass
+                datas.Add(new Models.CleanData.HarrysClass
                 {
                     Id = item.id,
                     RocketFamilyName = 666,
-                    Latitude = double.Parse((item.location.pads.FirstOrDefault()?.lattitude != "") ? item.location.pads.First().lattitude : "0"),
-                    Longitude = double.Parse((item.location.pads.FirstOrDefault().longitude != "") ? item.location.pads.First().longitude : "0"),
-                    LaunchPadName = item.location.pads.FirstOrDefault().name,
-                    AgencyName = item.location.pads.FirstOrDefault().agencies.FirstOrDefault()?.name,
+                    Latitude = double.Parse((item.location.pads.FirstOrDefault()?.latitude != null) ? item.location.pads.First().latitude : "0"),
+                    Longitude = double.Parse((item.location.pads.FirstOrDefault()?.longitude != null) ? item.location.pads.First().longitude : "0"),
+                    LaunchPadName = item.location.pads.FirstOrDefault()?.name,
+                    AgencyName = item.location.pads?.FirstOrDefault()?.agencies.FirstOrDefault()?.name,
                     MissionType = item.missions?.FirstOrDefault()?.typeName
                 });
 
