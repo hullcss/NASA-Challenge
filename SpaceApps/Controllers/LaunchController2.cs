@@ -21,7 +21,14 @@ namespace SpaceApps.Controllers
             {
                 CleanDataLaunches.Add(new Models.CleanData.MainLaunch(item));
             }
-      
+
+        }
+
+        public async Task<IActionResult> GetEvents(DateTime start, DateTime end)
+        {
+            var x = CleanDataLaunches.Where(y => y.net > start);
+            var a = x.Where(b => b.net < end);
+            return Ok(a);
         }
 
         [HttpGet]
@@ -39,7 +46,7 @@ namespace SpaceApps.Controllers
         public async Task<IActionResult> Grab(int id)
         {
             var searchedObject = CleanDataLaunches.FirstOrDefault(x => x.id == id);
-            if(searchedObject == new Models.CleanData.MainLaunch(new Models.RawData.Launch()))
+            if (searchedObject == new Models.CleanData.MainLaunch(new Models.RawData.Launch()))
             {
                 return NotFound("Id Not Found");
             }
