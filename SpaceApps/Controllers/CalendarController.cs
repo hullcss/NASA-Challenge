@@ -16,13 +16,5 @@ namespace SpaceApps.Controllers
         {
             return View(new EventViewModel());
         }
-
-        public JsonResult GetEvents(DateTime start, DateTime end)
-        {
-            
-
-
-            return Json(events.ToArray());
-        }
     }
 }
