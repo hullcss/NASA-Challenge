@@ -12,10 +12,16 @@ namespace SpaceApps.Controllers
     public class LaunchController : Controller
     {
         static Models.RawData.Launches Launches;
+        static List<Models.CleanData.MainLaunch> CleanDataLaunches = new List<Models.CleanData.MainLaunch>();
 
         static LaunchController()
         {
             Launches = doTheScrape().Result;
+            foreach (var item in Launches.launches)
+            {
+                CleanDataLaunches.Add(new Models.CleanData.MainLaunch(item));
+            }
+      
         }
 
         [HttpGet]
@@ -32,8 +38,8 @@ namespace SpaceApps.Controllers
         [Route("Grab")]
         public async Task<IActionResult> Grab(int id)
         {
-            var searchedObject = Launches.launches.FirstOrDefault(x => x.id == id);
-            if(searchedObject == new Models.RawData.Launch())
+            var searchedObject = CleanDataLaunches.FirstOrDefault(x => x.id == id);
+            if(searchedObject == new Models.CleanData.MainLaunch(new Models.RawData.Launch()))
             {
                 return NotFound("Id Not Found");
             }
