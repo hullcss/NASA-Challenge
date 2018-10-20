@@ -23,8 +23,8 @@ namespace SpaceApps.Controllers.RawData
                     response.EnsureSuccessStatusCode();
 
                     var stringResult = await response.Content.ReadAsStringAsync();
-                    var rawWeather = JsonConvert.DeserializeObject<Models.RawData.Launch[]>(stringResult);
-                    return Ok("Helloo");
+                    Models.RawData.Launches rawWeather = JsonConvert.DeserializeObject<Models.RawData.Launches>(stringResult);
+                    return Ok(rawWeather);
                 }
                 catch (HttpRequestException httpRequestException)
                 {
