@@ -37,8 +37,8 @@ namespace SpaceApps.Models.RawData
         public string hashtag { get; set; }
         public dynamic lsp { get; set; }
         public string changed { get; set; }
-        public dynamic location { get; set; }
+        public Location location { get; set; }
         public Rocket rocket { get; set; }
-        public dynamic missions { get; set; }
+        public Mission missions { get; set; }
     }
 }
