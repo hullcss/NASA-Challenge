@@ -47,7 +47,7 @@ namespace SpaceApps.Controllers
                 try
                 {
                     client.BaseAddress = new Uri("https://launchlibrary.net/1.4/");
-                    var response = await client.GetAsync($"launch/next/5");
+                    var response = await client.GetAsync($"launch/next/3000");
                     response.EnsureSuccessStatusCode();
 
                     var stringResult = await response.Content.ReadAsStringAsync();

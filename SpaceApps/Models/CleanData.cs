@@ -41,14 +41,7 @@ namespace SpaceApps.Models.CleanData
         {
             id = DirtyLaunch.id;
             name = DirtyLaunch.name;
-            if (DirtyLaunch.tbddate != 1 && DirtyLaunch.tbdtime != 1)
-            {
-                //convert them to date time I guess
-            }
-            else
-            {
-                //say it doesnt have it
-            }
+            net = Convert.ToDateTime(DirtyLaunch.net.TrimEnd(new char[] { 'U', 'T', 'C' }));
             WeStamp = DirtyLaunch.westamp;
             WsStamp = DirtyLaunch.wsstamp;
             NetStamp = DirtyLaunch.netstamp;
