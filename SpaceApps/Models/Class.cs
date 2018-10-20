@@ -38,9 +38,9 @@ namespace SpaceApps.Models.RawData
         public int launch { get; set; }
         public int type { get; set; }
         public string typeName { get; set; }
-        public List<dynamic> agencies { get; set; }
-        public dynamic[] events { get; set; }
-        public List<dynamic> payloads { get; set; }
+        public List<Agency> agencies { get; set; }
+        public MissionEvent[] events { get; set; }
+        public List<Payload> payloads { get; set; }
     }
 
     public class MissionEvent : BaseObject
@@ -71,7 +71,7 @@ namespace SpaceApps.Models.RawData
         public string mapURL { get; set; }
         public int retired { get; set; }
         public int locationid { get; set; }
-        public Agency[] agencies { get; set; }
+        public List<Agency> agencies { get; set; }
     }
 
     public class lsp : Agency
