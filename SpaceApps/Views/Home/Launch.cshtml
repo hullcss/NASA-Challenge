@@ -72,9 +72,10 @@
     <div class="grid-60 mobile-grid-100">
         <div class="launchInfoHead">Journey</div>
         <div class="launchInfoContent">
-            if (@Model.Missions.Count() > 0)
-            {
-            @Model.Missions[0].Description
+            @{ if (@Model.Missions.Count() != 0)
+                {
+                    @Model.Missions[0].Description
+                }
             }
         </div>
     </div>
