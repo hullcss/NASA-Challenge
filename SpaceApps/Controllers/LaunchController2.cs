@@ -39,9 +39,8 @@ namespace SpaceApps.Controllers
                     id = item.id,
                     title = item.name,
                     start = item.WindowStart.ToString("O"),
-                    end = item.WindowEnd.ToString("O"),
                     allDay = false,
-                    url = "http://google.com/",
+                    url = $"/launch/grab/?id={item.id}",
                 });
             }
 
@@ -63,7 +62,7 @@ namespace SpaceApps.Controllers
         public async Task<IActionResult> Grab(int id)
         {
             var searchedObject = CleanDataLaunches.FirstOrDefault(x => x.id == id);
-            if (searchedObject == new Models.CleanData.MainLaunch(new Models.RawData.Launch()))
+            if (searchedObject == null)
             {
                 return NotFound("Id Not Found");
             }

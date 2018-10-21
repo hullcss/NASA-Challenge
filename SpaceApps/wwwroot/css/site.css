@@ -216,3 +216,13 @@ footer a {
 .bigtext {
     font-size: 15px;
 }
+
+.fc-content {
+    padding: 5px 0px;
+    background-color: #c55a35;
+    color: #ffffff;
+}
+
+.fc-event {
+    background-color: #c75a2e;
+}
