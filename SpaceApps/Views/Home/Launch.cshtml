@@ -59,7 +59,11 @@
             }
             @{ if (@Model.Missions != null)
                 {
-                    <b>Type:</b> @Model.Missions[0].TypeName<br />
+                    @{if (@Model.Missions.Count() > 0)
+                        {
+                            <b>Type:</b> @Model.Missions[0].TypeName<br />
+                        }
+                    }
                 }
             }
         </div>
@@ -109,30 +113,30 @@
         {
             if (@Model?.Agency?.InfoURLs != null)
             {
-                if (@Model.Agency.InfoURLs.Count() >0)
+                if (@Model.Agency.InfoURLs.Count() > 0)
                 {
                     <div class="grid-33 mobile-grid-100">
-                    <div class="launchInfoHead">Agency Links</div>
-                    <div class="launchInfoContent">
+                        <div class="launchInfoHead">Agency Links</div>
+                        <div class="launchInfoContent">
 
-                        @foreach (string link in Model.Agency.InfoURLs)
-                        {
-                            @if (link.Contains("twitter"))
+                            @foreach (string link in Model.Agency.InfoURLs)
                             {
-                                <a href="@link"><i class="fab fa-twitter"></i> &nbsp; Twitter</a><br />
+                                @if (link.Contains("twitter"))
+                                {
+                                    <a href="@link"><i class="fab fa-twitter"></i> &nbsp; Twitter</a><br />
+                                }
+                                else if (link.Contains("facebook"))
+                                {
+                                    <a href="@link"><i class="fab fa-facebook-square"></i> &nbsp; Facebook</a><br />
+                                }
+                                else
+                                {
+                                    <a href="@link"><i class="fa fa-desktop"></i> &nbsp; Website</a><br />
+                                }
                             }
-                            else if (link.Contains("facebook"))
-                            {
-                                <a href="@link"><i class="fab fa-facebook-square"></i> &nbsp; Facebook</a><br />
-                            }
-                            else
-                            {
-                                <a href="@link"><i class="fa fa-desktop"></i> &nbsp; Website</a><br />
-                            }
-                        }
+                        </div>
                     </div>
-                </div>
-                    }
+                }
             }
         }
     }
@@ -143,35 +147,35 @@
             {
                 if (@Model.Missions[0].Agencies.Count() > 0)
                 {
-                <div class="grid-33 mobile-grid-100">
-                    <div class="launchInfoHead">Mission Links</div>
-                    <div class="launchInfoContent">
+                    <div class="grid-33 mobile-grid-100">
+                        <div class="launchInfoHead">Mission Links</div>
+                        <div class="launchInfoContent">
 
-                        @foreach (string link in Model.Missions[0].Agencies[0].InfoURLs)
-                        {
-                            var linkText = new Uri(link).Host;
-                            linkText = Regex.Replace(linkText, @"^(?:http(?:s)?://)?(?:www(?:[0-9]+)?\.)?", string.Empty, RegexOptions.IgnoreCase);
+                            @foreach (string link in Model.Missions[0].Agencies[0].InfoURLs)
+                            {
+                                var linkText = new Uri(link).Host;
+                                linkText = Regex.Replace(linkText, @"^(?:http(?:s)?://)?(?:www(?:[0-9]+)?\.)?", string.Empty, RegexOptions.IgnoreCase);
 
 
-                            @if (link.Contains("twitter"))
-                            {
-                                <a href="@link"><i class="fab fa-twitter"></i> &nbsp; Twitter</a><br />
+                                @if (link.Contains("twitter"))
+                                {
+                                    <a href="@link"><i class="fab fa-twitter"></i> &nbsp; Twitter</a><br />
+                                }
+                                else if (link.Contains("facebook"))
+                                {
+                                    <a href="@link"><i class="fab fa-facebook-square"></i> &nbsp; Facebook</a><br />
+                                }
+                                else if (link.Contains("youtube"))
+                                {
+                                    <a href="@link"><i class="fab fa-youtube"></i> &nbsp; YouTube</a><br />
+                                }
+                                else
+                                {
+                                    <a href="@link"><i class="fa fa-desktop"></i> &nbsp; @linkText </a><br />
+                                }
                             }
-                            else if (link.Contains("facebook"))
-                            {
-                                <a href="@link"><i class="fab fa-facebook-square"></i> &nbsp; Facebook</a><br />
-                            }
-                            else if (link.Contains("youtube"))
-                            {
-                                <a href="@link"><i class="fab fa-youtube"></i> &nbsp; YouTube</a><br />
-                            }
-                            else
-                            {
-                                <a href="@link"><i class="fa fa-desktop"></i> &nbsp; @linkText </a><br />
-                            }
-                        }
+                        </div>
                     </div>
-                </div>
                 }
             }
         }
@@ -203,7 +207,7 @@
                     </div>
                 </div>
 
-                }
             }
         }
-    </div>
+    }
+</div>
