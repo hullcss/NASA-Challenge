@@ -39,8 +39,8 @@ namespace SpaceApps.Controllers
                 {   
                     id = item.id,
                     title = item.name,
-                    start = item.WindowStart.ToString(),
-                    end = item.WindowEnd.ToString(),
+                    start = item.WindowStart.ToString("O"),
+                    end = item.WindowEnd.ToString("O"),
                     allDay = false
                 });
             }
