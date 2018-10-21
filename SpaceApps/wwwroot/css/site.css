@@ -210,7 +210,8 @@ footer a {
 
 .grid-30, .grid-50, .grid-33, .grid-40 {
     margin-bottom: 10px;
-    min-height: 130px;
+    min-height: 160px;
+    margin: 10px 0px;
 }
 
 .streamblock {
