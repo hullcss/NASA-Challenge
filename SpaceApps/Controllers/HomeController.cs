@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SpaceApps.Models;
+using SpaceApps.Models.CleanData;
+using Newtonsoft.Json;
 
 namespace SpaceApps.Controllers
 {
@@ -20,9 +23,17 @@ namespace SpaceApps.Controllers
             return View();
         }
 
-        public IActionResult Launch()
+        public async Task<IActionResult> Launch(int launchId)
         {
-            return View();
+            MainLaunch launchModel;
+            using(HttpClient client = new HttpClient())
+            {
+                client.BaseAddress =new Uri("https://localhost:5001");
+                var result = await client.GetAsync($"launch/grab/?id={launchId}");
+                var resultString = await result.Content.ReadAsStringAsync();
+                launchModel = JsonConvert.DeserializeObject<MainLaunch>(resultString);
+            }
+            return View(launchModel);
         }
 
         public IActionResult Privacy()

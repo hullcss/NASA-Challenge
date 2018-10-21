@@ -1,11 +1,13 @@
-﻿@{
+﻿@model SpaceApps.Models.CleanData.MainLaunch
+
+@{
     ViewData["Title"] = "Launch";
 }
 
 <div class="grid-container">
     <div class="mobile-grid-100">
-        <div class='launchTitle'>Russian Aerospace Defence Forces</div>
-        <div class="launchText">Soyuz 2.1B | Lotos-S1</div>
+        <div class='launchTitle'>@Model.Agency.name</div>
+        <div class="launchText">@Model.name</div>
     </div>
 
     <div class="grid-33 mobile-grid-100">
@@ -21,6 +23,13 @@
 
         </div>
     </div>
+
+    @{ 
+        if (true)
+        {
+            <h1>Hello World</h1>
+        }
+    }
 
     <div class="grid-33" >
         <div class="image" style="background:url(https://s3.amazonaws.com/launchlibrary/RocketImages/placeholder_1920.png);"></div>

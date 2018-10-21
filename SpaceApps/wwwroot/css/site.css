@@ -224,5 +224,6 @@ footer a {
 }
 
 .fc-event {
-    background-color: #c75a2e;
+    border: 1px solid #c75a2e !important;
+    background-color: #c75a2e !important;
 }

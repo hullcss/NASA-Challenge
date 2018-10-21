@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace SpaceApps.Models.CleanData
 {
@@ -37,6 +38,12 @@ namespace SpaceApps.Models.CleanData
         public Rocket Rocket { get; set; }
         public List<Mission> Missions { get; set; }
 
+        [JsonConstructor]
+        public MainLaunch()
+        {
+
+        }
+
         public MainLaunch(SpaceApps.Models.RawData.Launch DirtyLaunch)
         {
             id = DirtyLaunch.id;
@@ -71,6 +78,11 @@ namespace SpaceApps.Models.CleanData
         public int Type { get; set; }
         public string CountryCode { get; set; }
 
+        public Agency()
+        {
+
+        }
+
         public Agency(SpaceApps.Models.RawData.Agency DirtyAgency)
         {
             if (DirtyAgency != null)
@@ -96,6 +108,11 @@ namespace SpaceApps.Models.CleanData
         public List<Agency> Agencies { get; set; }
         public List<PayLoad> PayLoads { get; set; }
         public List<MissionEvent> MissionEvents { get; set; }
+
+        public Mission()
+        {
+
+        }
 
         public Mission(SpaceApps.Models.RawData.Mission DirtyMission)
         {
@@ -148,6 +165,10 @@ namespace SpaceApps.Models.CleanData
         public string ImageURL { get; set; }
         public int[] ImageSizes { get; set; }
 
+        public Rocket()
+        {
+
+        }
         public Rocket(SpaceApps.Models.RawData.Rocket DirtyRocket)
         {
             DefaultPads = DirtyRocket.defualtpads;
@@ -187,6 +208,10 @@ namespace SpaceApps.Models.CleanData
         public string CountryCode { get; set; }
         public List<Pad> Pads { get; set; }
 
+        public Location()
+        {
+
+        }
         public Location(SpaceApps.Models.RawData.Location DirtyLocation)
         {
             CountryCode = DirtyLocation.countrycode;
@@ -237,10 +262,18 @@ namespace SpaceApps.Models.CleanData
         public int LocationId { get; set; }
         public List<Agency> Agencies { get; set; }
 
+        public Pad()
+        {
+
+        }
+
+
         public Pad(Models.RawData.Pad dirtyPad) : base()
         {
-            Latitude = double.Parse(dirtyPad.latitude.ToString());
-            Longitude = double.Parse(dirtyPad.longitude.ToString());
+            double.TryParse(dirtyPad.latitude, out double tempLat);
+            Latitude = tempLat;
+            double.TryParse(dirtyPad.latitude, out double tempLong);
+            Longitude = tempLong;
             MapURL = dirtyPad.mapURL;
             Retired = dirtyPad.retired.ToString();
             LocationId = dirtyPad.locationid;
