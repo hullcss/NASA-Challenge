@@ -48,7 +48,7 @@ namespace SpaceApps.Models.CleanData
         {
             id = DirtyLaunch.id;
             name = DirtyLaunch.name;
-            net =Convert.ToDateTime(DirtyLaunch.net.TrimEnd(new char[] { 'U', 'T', 'C' }));
+            net = Convert.ToDateTime(DirtyLaunch.net.TrimEnd(new char[] { 'U', 'T', 'C' }));
             WindowStart = Convert.ToDateTime(DirtyLaunch.windowstart.TrimEnd(new char[] { 'U', 'T', 'C' }));
             WindowEnd = Convert.ToDateTime(DirtyLaunch.windowend.TrimEnd(new char[] { 'U', 'T', 'C' }));
             WeStamp = DirtyLaunch.westamp;
@@ -130,7 +130,7 @@ namespace SpaceApps.Models.CleanData
             PayLoads = new List<PayLoad>();
             if (DirtyMission.payloads != null)
                 foreach (var item in DirtyMission.payloads)
-                PayLoads.Add(new PayLoad(item));
+                    PayLoads.Add(new PayLoad(item));
 
             MissionEvents = new List<MissionEvent>();
             if (DirtyMission?.events != null)
@@ -172,9 +172,16 @@ namespace SpaceApps.Models.CleanData
         }
         public Rocket(SpaceApps.Models.RawData.Rocket DirtyRocket)
         {
+            if (DirtyRocket.imageURL == "https://s3.amazonaws.com/launchlibrary/RocketImages/placeholder_1920.png")
+            {
+                ImageURL = "https://www.ulalaunch.com/images/default-source/gallery/2018-ir-1.jpg?sfvrsn=f69b5690_0";
+            }
+            else
+            {
+                ImageURL = DirtyRocket.imageURL;
+            }
             DefaultPads = DirtyRocket.defualtpads;
             Family = new RocketFamily(DirtyRocket.family);
-            ImageURL = DirtyRocket.imageURL;
             ImageSizes = DirtyRocket.imageSizes;
             name = DirtyRocket.name;
             id = DirtyRocket.id;
