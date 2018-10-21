@@ -41,7 +41,7 @@ namespace SpaceApps.Models.CleanData
         {
             id = DirtyLaunch.id;
             name = DirtyLaunch.name;
-            net = Convert.ToDateTime(DirtyLaunch.net.TrimEnd(new char[] { 'U', 'T', 'C' }));
+            net = DateTime.Parse(DirtyLaunch.net.TrimEnd(new char[] { 'U', 'T', 'C' }));
             WeStamp = DirtyLaunch.westamp;
             WsStamp = DirtyLaunch.wsstamp;
             NetStamp = DirtyLaunch.netstamp;
