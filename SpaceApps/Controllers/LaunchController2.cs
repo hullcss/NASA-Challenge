@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SpaceApps.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class LaunchController : Controller
     {
         static Models.RawData.Launches Launches;
@@ -24,11 +24,28 @@ namespace SpaceApps.Controllers
 
         }
 
+        [Route("GetEvents")]
         public async Task<IActionResult> GetEvents(DateTime start, DateTime end)
         {
             var x = CleanDataLaunches.Where(y => y.net > start);
             var a = x.Where(b => b.net < end);
-            return Ok(a);
+
+
+            List<Models.EventViewModel> events = new List<Models.EventViewModel>();
+            foreach (var item in a)
+            {
+                //"2018-10-021T20:00:10"
+                events.Add(new Models.EventViewModel
+                {   
+                    id = item.id,
+                    title = item.name,
+                    start = item.WindowStart.ToString(),
+                    end = item.WindowEnd.ToString(),
+                    allDay = false
+                });
+            }
+
+            return Ok(events);
         }
 
         [HttpGet]
