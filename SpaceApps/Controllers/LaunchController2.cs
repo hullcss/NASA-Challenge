@@ -34,14 +34,14 @@ namespace SpaceApps.Controllers
             List<Models.EventViewModel> events = new List<Models.EventViewModel>();
             foreach (var item in a)
             {
-                //"2018-10-021T20:00:10"
                 events.Add(new Models.EventViewModel
                 {   
                     id = item.id,
                     title = item.name,
-                    start = item.WindowStart.ToString(),
-                    end = item.WindowEnd.ToString(),
-                    allDay = false
+                    start = item.WindowStart.ToString("O"),
+                    end = item.WindowEnd.ToString("O"),
+                    allDay = false,
+                    url = "http://google.com/",
                 });
             }
 
