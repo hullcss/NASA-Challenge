@@ -141,6 +141,8 @@
         {
             if (@Model.Missions.Count() > 0)
             {
+                if (@Model.Missions[0].Agencies.Count() > 0)
+                {
                 <div class="grid-33 mobile-grid-100">
                     <div class="launchInfoHead">Mission Links</div>
                     <div class="launchInfoContent">
@@ -170,7 +172,7 @@
                         }
                     </div>
                 </div>
-
+                }
             }
         }
     }
