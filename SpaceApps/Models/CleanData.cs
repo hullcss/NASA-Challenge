@@ -65,6 +65,7 @@ namespace SpaceApps.Models.CleanData
             Location = new Location(DirtyLaunch.location);
             Rocket = new Rocket(DirtyLaunch.rocket);
             Missions = new List<Mission>();
+            LaunchStatus = (LaunchStatus)DirtyLaunch.status;
 
             if (DirtyLaunch.missions != null)
                 foreach (var item in DirtyLaunch.missions)
