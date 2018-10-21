@@ -26,9 +26,9 @@ namespace SpaceApps.Controllers
         public async Task<IActionResult> Launch(int launchId)
         {
             MainLaunch launchModel;
-            using(HttpClient client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress =new Uri("https://localhost:5001");
+                client.BaseAddress = new Uri("https://localhost:5001");
                 var result = await client.GetAsync($"launch/grab/?id={launchId}");
                 var resultString = await result.Content.ReadAsStringAsync();
                 launchModel = JsonConvert.DeserializeObject<MainLaunch>(resultString);
