@@ -195,6 +195,7 @@ footer a {
     color: #ffffff;
     padding: 10px;
     line-height: 2;
+    min-height: 80px;
 }
 
 .image {
@@ -207,8 +208,9 @@ footer a {
     background-repeat: no-repeat !important;
 }
 
-.grid-30, .grid-50, .grid-33 {
-    margin-bottom: 20px;
+.grid-30, .grid-50, .grid-33, .grid-40 {
+    margin-bottom: 10px;
+    min-height: 130px;
 }
 
 .streamblock {

@@ -61,7 +61,7 @@ namespace SpaceApps.Controllers
         [Route("Grab")]
         public async Task<IActionResult> Grab(int id)
         {
-            var searchedObject = CleanDataLaunches.FirstOrDefault(x => x.id == id);
+            var searchedObject = CleanDataLaunches.Where(x => x.id == id);
             if (searchedObject == null)
             {
                 return NotFound("Id Not Found");
