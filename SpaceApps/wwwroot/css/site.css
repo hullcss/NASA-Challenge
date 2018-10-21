@@ -202,7 +202,7 @@ footer a {
     height: 175px;
     background-size: cover !important;
     border: 2px solid #574c7c;
-    background-position: center;
+    background-position: center !important;
 }
 
 .grid-30, .grid-50, .grid-33 {
