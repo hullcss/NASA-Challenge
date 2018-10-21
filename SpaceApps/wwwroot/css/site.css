@@ -195,18 +195,23 @@ footer a {
     color: #ffffff;
     padding: 10px;
     line-height: 2;
+    min-height: 80px;
 }
 
 .image {
     width: 100%;
     height: 175px;
-    background-size: cover !important;
+    background-size: contain !important;
     border: 2px solid #574c7c;
-    background-position: center;
+    background-position: center !important;
+    background-color: #574b7d !important;
+    background-repeat: no-repeat !important;
 }
 
-.grid-30, .grid-50, .grid-33 {
-    margin-bottom: 20px;
+.grid-30, .grid-50, .grid-33, .grid-40 {
+    margin-bottom: 10px;
+    min-height: 160px;
+    margin: 10px 0px;
 }
 
 .streamblock {
@@ -215,4 +220,15 @@ footer a {
 
 .bigtext {
     font-size: 15px;
+}
+
+.fc-content {
+    padding: 5px 0px;
+    background-color: #c55a35;
+    color: #ffffff;
+}
+
+.fc-event {
+    border: 1px solid #c75a2e !important;
+    background-color: #c75a2e !important;
 }

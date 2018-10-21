@@ -1,59 +1,216 @@
-﻿@{
+﻿@model SpaceApps.Models.CleanData.MainLaunch
+@{
     ViewData["Title"] = "Launch";
-}
+    @using System.Text.RegularExpressions;
 
+}
 <div class="grid-container">
     <div class="mobile-grid-100">
-        <div class='launchTitle'>Russian Aerospace Defence Forces</div>
-        <div class="launchText">Soyuz 2.1B | Lotos-S1</div>
+        <div class='launchTitle'>@Model.Agency.name</div>
+        <div class="launchText">@Model.name</div>
     </div>
-
     <div class="grid-33 mobile-grid-100">
         <div class="launchInfoHead">About</div>
         <div class="launchInfoContent">
-            <div class="launchState green"><i class="fas fa-calendar-check"></i>&nbsp; Ready to Launch</div>
-            <!--<div class="launchState red"><i class="fas fa-calendar-times"></i>&nbsp; Not Ready to Launch</div>
-            <div class="launchState success"><i class="fas fa-calendar-check"></i>&nbsp; Success</div>
-            <div class="launchState failure"><i class="fas fa-frown-open"></i>&nbsp; Failure</div>-->
+            @{
+                int launchStatus = Convert.ToInt32(Model.LaunchStatus);
+                switch (launchStatus)
+                {
+                    case 1:
+                        <div class="launchState green"><i class="fas fa-calendar-check"></i>&nbsp; Ready to Launch</div>
+                        break;
+                    case 2:
+                        <div class="launchState red"><i class="fas fa-calendar-times"></i>&nbsp; Not Ready to Launch</div>
+                        break;
+                    case 3:
+                        <div class="launchState success"><i class="fas fa-calendar-check"></i>&nbsp; Success</div>
+                        break;
+                    case 4:
+                        <div class="launchState failure"><i class="fas fa-frown-open"></i>&nbsp; Failure</div>
+                        break;
 
-            <i class="fas fa-clock"></i> 30 Minutes til Launch<br />
-            <i class="fas fa-calendar"></i> Thursday 3rd July 23:00 UTC<br />
-
+                };
+            }
+            <i class="fas fa-calendar"></i> &nbsp; @Model.WindowStart.ToString("dd MMMM yyyy hh:mm:ss UTC")<br />
         </div>
     </div>
 
-    <div class="grid-33" >
-        <div class="image" style="background:url(https://s3.amazonaws.com/launchlibrary/RocketImages/placeholder_1920.png);"></div>
+    <div class="grid-33">
+        <div class="image" style="background:url(@Model.Rocket.ImageURL);"></div>
     </div>
 
     <div class="grid-33 mobile-grid-100">
-    <div class="launchInfoHead">Launch Stream</div>
-        <iframe width="100%" class="streamblock" src="https://www.youtube-nocookie.com/embed/OAyL0VCf_L4?controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="launchInfoHead">More Info</div>
+        <div class="launchInfoContent bigtext">
+            @{ if (@Model.Agency != null)
+                {
+                    <b>Agency:</b> @Model.Agency.name<br />
+                }
+            }
+            @{ if (@Model.Location != null)
+                {
+                    <b>Location:</b> @Model.Location.name <br />
+                }
+            }
+            @{ if (@Model.Location != null)
+                {
+                    <b>Country:</b> @Model.Location.CountryCode <br />
+                }
+            }
+            @{ if (@Model.Missions != null)
+                {
+                    if (@Model.Missions.Count() > 0)
+                    {
+                        <b>Type:</b> @Model.Missions[0].TypeName<br />
+                    }
+                }
+            }
+        </div>
     </div>
 
 
     <div class="grid-60 mobile-grid-100">
         <div class="launchInfoHead">Journey</div>
         <div class="launchInfoContent">
-            KhalifaSat is an Earth observation satellite for UAE. KhalifaSat will provide high-resolution imagery of Earth to be used for various purposes, including urban planning, change monitoring, area classification, monitoring environmental change and aiding relief efforts for natural disasters GOSAT 2 (Greenhouse gases Observing SATellite 2) is a Japanese satellite dedicated to greenhouse gas measurement from space. It's a follow on to the GOSAT mission and includes such improvements as an ability to gather more precise data and monitor carbon monoxide concentrations.
+            @{ if (@Model.Missions.Count() != 0)
+                {
+                    @Model.Missions[0].Description
+                }
+            }
         </div>
-
     </div>
-    
 
     <div class="grid-40 mobile-grid-100">
-        <div class="launchInfoHead">More Info</div>
-        <div class="launchInfoContent bigtext">
-            <b>Launched by:</b> NASA<br />
-            <b>Country:</b> USA<br />
-            <b>Type:</b>  Planetary Science </br>
-            <b>Latest Change:</b> 21st June <br />
-            <b>Where:</b>  Tagason, Japan   
+        <div class="launchInfoHead">
+            On Wikipedia
+        </div>
+        <div class="launchInfoContent">
+            @{ if (@Model.Rocket.WikiURL != null)
+                {
+                    <a href="@Model.Rocket.WikiURL"><i class="fab fa-wikipedia-w"></i> Rocket Wikipedia</a>
+                }
+            }
+            <br />
+            @{ if (@Model.Agency.WikiURL != null)
+                {
+                    <a href="@Model.Agency.WikiURL"><i class="fab fa-wikipedia-w"></i> Agency Wikipedia</a>
+                }
+            }
         </div>
     </div>
 
+    @{ if (@Model.VidURLS != null)
+        {
+            foreach (string vid in Model.VidURLS)
+            {
+                <div class="grid-33 mobile-grid-100">
+                    <div class="launchInfoHead">Launch Stream</div>
+                    <iframe width="100%" class="streamblock" src="https://www.youtube-nocookie.com/embed/@vid.Substring(32)?controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+            }
+        }
+
+    }
+
+    @{ if (@Model.Agency.InfoURLs != null)
+        {
+            if (@Model?.Agency?.InfoURLs != null)
+            {
+                if (@Model.Agency.InfoURLs.Count() > 0)
+                {
+                    <div class="grid-33 mobile-grid-100">
+                        <div class="launchInfoHead">Agency Links</div>
+                        <div class="launchInfoContent">
+
+                            @foreach (string link in Model.Agency.InfoURLs)
+                            {
+                                @if (link.Contains("twitter"))
+                                {
+                                    <a href="@link"><i class="fab fa-twitter"></i> &nbsp; Twitter</a><br />
+                                }
+                                else if (link.Contains("facebook"))
+                                {
+                                    <a href="@link"><i class="fab fa-facebook-square"></i> &nbsp; Facebook</a><br />
+                                }
+                                else
+                                {
+                                    <a href="@link"><i class="fa fa-desktop"></i> &nbsp; Website</a><br />
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        }
+    }
+
+    @{ if (@Model.Missions != null)
+        {
+            if (@Model.Missions.Count() > 0)
+            {
+                if (@Model.Missions[0].Agencies.Count() > 0)
+                {
+                    <div class="grid-33 mobile-grid-100">
+                        <div class="launchInfoHead">Mission Links</div>
+                        <div class="launchInfoContent">
+
+                            @foreach (string link in Model.Missions[0].Agencies[0].InfoURLs)
+                            {
+                                var linkText = new Uri(link).Host;
+                                linkText = Regex.Replace(linkText, @"^(?:http(?:s)?://)?(?:www(?:[0-9]+)?\.)?", string.Empty, RegexOptions.IgnoreCase);
 
 
+                                @if (link.Contains("twitter"))
+                                {
+                                    <a href="@link"><i class="fab fa-twitter"></i> &nbsp; Twitter</a><br />
+                                }
+                                else if (link.Contains("facebook"))
+                                {
+                                    <a href="@link"><i class="fab fa-facebook-square"></i> &nbsp; Facebook</a><br />
+                                }
+                                else if (link.Contains("youtube"))
+                                {
+                                    <a href="@link"><i class="fab fa-youtube"></i> &nbsp; YouTube</a><br />
+                                }
+                                else
+                                {
+                                    <a href="@link"><i class="fa fa-desktop"></i> &nbsp; @linkText </a><br />
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        }
+    }
 
+    @{ if (@Model.InfoURLS != null)
+        {
+            if (@Model.InfoURLS.Count() > 0)
+            {
+                <div class="grid-33 mobile-grid-100">
+                    <div class="launchInfoHead">Links</div>
+                    <div class="launchInfoContent">
+
+                        @foreach (string link in Model.InfoURLS)
+                        {
+                            @if (link.Contains("twitter"))
+                            {
+                                <a href="@link"><i class="fab fa-twitter"></i> &nbsp; Twitter</a><br />
+                            }
+                            else if (link.Contains("facebook"))
+                            {
+                                <a href="@link"><i class="fab fa-facebook-square"></i> &nbsp; Facebook</a><br />
+                            }
+                            else
+                            {
+                                <a href="@link"><i class="fa fa-desktop"></i> &nbsp; Website</a><br />
+                            }
+                        }
+                    </div>
+                </div>
+
+            }
+        }
+    }
 </div>
-

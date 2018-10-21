@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace SpaceApps.Models.CleanData
 {
@@ -37,11 +38,19 @@ namespace SpaceApps.Models.CleanData
         public Rocket Rocket { get; set; }
         public List<Mission> Missions { get; set; }
 
+        [JsonConstructor]
+        public MainLaunch()
+        {
+
+        }
+
         public MainLaunch(SpaceApps.Models.RawData.Launch DirtyLaunch)
         {
             id = DirtyLaunch.id;
             name = DirtyLaunch.name;
             net = Convert.ToDateTime(DirtyLaunch.net.TrimEnd(new char[] { 'U', 'T', 'C' }));
+            WindowStart = Convert.ToDateTime(DirtyLaunch.windowstart.TrimEnd(new char[] { 'U', 'T', 'C' }));
+            WindowEnd = Convert.ToDateTime(DirtyLaunch.windowend.TrimEnd(new char[] { 'U', 'T', 'C' }));
             WeStamp = DirtyLaunch.westamp;
             WsStamp = DirtyLaunch.wsstamp;
             NetStamp = DirtyLaunch.netstamp;
@@ -56,6 +65,7 @@ namespace SpaceApps.Models.CleanData
             Location = new Location(DirtyLaunch.location);
             Rocket = new Rocket(DirtyLaunch.rocket);
             Missions = new List<Mission>();
+            LaunchStatus = (LaunchStatus)DirtyLaunch.status;
 
             if (DirtyLaunch.missions != null)
                 foreach (var item in DirtyLaunch.missions)
@@ -68,6 +78,11 @@ namespace SpaceApps.Models.CleanData
         public string Abbreviation { get; set; }
         public int Type { get; set; }
         public string CountryCode { get; set; }
+
+        public Agency()
+        {
+
+        }
 
         public Agency(SpaceApps.Models.RawData.Agency DirtyAgency)
         {
@@ -95,6 +110,11 @@ namespace SpaceApps.Models.CleanData
         public List<PayLoad> PayLoads { get; set; }
         public List<MissionEvent> MissionEvents { get; set; }
 
+        public Mission()
+        {
+
+        }
+
         public Mission(SpaceApps.Models.RawData.Mission DirtyMission)
         {
             Description = DirtyMission.description;
@@ -110,7 +130,7 @@ namespace SpaceApps.Models.CleanData
             PayLoads = new List<PayLoad>();
             if (DirtyMission.payloads != null)
                 foreach (var item in DirtyMission.payloads)
-                PayLoads.Add(new PayLoad(item));
+                    PayLoads.Add(new PayLoad(item));
 
             MissionEvents = new List<MissionEvent>();
             if (DirtyMission?.events != null)
@@ -146,11 +166,22 @@ namespace SpaceApps.Models.CleanData
         public string ImageURL { get; set; }
         public int[] ImageSizes { get; set; }
 
+        public Rocket()
+        {
+
+        }
         public Rocket(SpaceApps.Models.RawData.Rocket DirtyRocket)
         {
+            if (DirtyRocket.imageURL == "https://s3.amazonaws.com/launchlibrary/RocketImages/placeholder_1920.png")
+            {
+                ImageURL = "https://www.ulalaunch.com/images/default-source/gallery/2018-ir-1.jpg?sfvrsn=f69b5690_0";
+            }
+            else
+            {
+                ImageURL = DirtyRocket.imageURL;
+            }
             DefaultPads = DirtyRocket.defualtpads;
             Family = new RocketFamily(DirtyRocket.family);
-            ImageURL = DirtyRocket.imageURL;
             ImageSizes = DirtyRocket.imageSizes;
             name = DirtyRocket.name;
             id = DirtyRocket.id;
@@ -185,6 +216,10 @@ namespace SpaceApps.Models.CleanData
         public string CountryCode { get; set; }
         public List<Pad> Pads { get; set; }
 
+        public Location()
+        {
+
+        }
         public Location(SpaceApps.Models.RawData.Location DirtyLocation)
         {
             CountryCode = DirtyLocation.countrycode;
@@ -217,6 +252,11 @@ namespace SpaceApps.Models.CleanData
         //public int Total { get; set; }
         //public string MissionID { get; set; }
 
+        public PayLoad()
+        {
+
+        }
+
         public PayLoad(SpaceApps.Models.RawData.Payload DirtyPayLoad)
         {
             CountryCodes = DirtyPayLoad.countyCodes;
@@ -235,10 +275,18 @@ namespace SpaceApps.Models.CleanData
         public int LocationId { get; set; }
         public List<Agency> Agencies { get; set; }
 
+        public Pad()
+        {
+
+        }
+
+
         public Pad(Models.RawData.Pad dirtyPad) : base()
         {
-            Latitude = double.Parse(dirtyPad.latitude.ToString());
-            Longitude = double.Parse(dirtyPad.longitude.ToString());
+            double.TryParse(dirtyPad.latitude, out double tempLat);
+            Latitude = tempLat;
+            double.TryParse(dirtyPad.latitude, out double tempLong);
+            Longitude = tempLong;
             MapURL = dirtyPad.mapURL;
             Retired = dirtyPad.retired.ToString();
             LocationId = dirtyPad.locationid;

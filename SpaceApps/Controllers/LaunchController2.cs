@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SpaceApps.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class LaunchController : Controller
     {
         static Models.RawData.Launches Launches;
@@ -24,11 +24,27 @@ namespace SpaceApps.Controllers
 
         }
 
+        [Route("GetEvents")]
         public async Task<IActionResult> GetEvents(DateTime start, DateTime end)
         {
             var x = CleanDataLaunches.Where(y => y.net > start);
             var a = x.Where(b => b.net < end);
-            return Ok(a);
+
+
+            List<Models.EventViewModel> events = new List<Models.EventViewModel>();
+            foreach (var item in a)
+            {
+                events.Add(new Models.EventViewModel
+                {   
+                    id = item.id,
+                    title = item.name,
+                    start = item.WindowStart.ToString("O"),
+                    allDay = false,
+                    url = $"/Home/Launch?launchId={item.id}",
+                });
+            }
+
+            return Ok(events);
         }
 
         [HttpGet]
@@ -45,8 +61,8 @@ namespace SpaceApps.Controllers
         [Route("Grab")]
         public async Task<IActionResult> Grab(int id)
         {
-            var searchedObject = CleanDataLaunches.FirstOrDefault(x => x.id == id);
-            if (searchedObject == new Models.CleanData.MainLaunch(new Models.RawData.Launch()))
+            var searchedObject = CleanDataLaunches.Where(x => x.id == id);
+            if (searchedObject == null)
             {
                 return NotFound("Id Not Found");
             }
@@ -60,7 +76,7 @@ namespace SpaceApps.Controllers
                 try
                 {
                     client.BaseAddress = new Uri("https://launchlibrary.net/1.4/");
-                    var response = await client.GetAsync($"launch/next/3000");
+                    var response = await client.GetAsync($"launch/next/100");
                     response.EnsureSuccessStatusCode();
 
                     var stringResult = await response.Content.ReadAsStringAsync();
