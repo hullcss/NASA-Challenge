@@ -84,6 +84,23 @@
         }
     }
 
-
-</div>
+            <div class="grid-40 mobile-grid-100">
+                <div class="launchInfoHead">
+                    On other sites:
+                </div>
+                <div class="launchInfoContent">
+            @{ if (@Model.Rocket.WikiURL != null)
+            {
+                <a href="@Model.Rocket.WikiURL">Rocket Wikipedia</a>
+}
+            }
+            <br />
+            @{ if (@Model.Agency.WikiURL != null)
+            {
+                <a href="@Model.Agency.WikiURL">Agency Wikipedia</a>
+}
+            }
+                </div>
+                </div>
+    </div>
 

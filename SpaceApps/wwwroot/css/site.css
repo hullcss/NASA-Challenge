@@ -200,9 +200,11 @@ footer a {
 .image {
     width: 100%;
     height: 175px;
-    background-size: cover !important;
+    background-size: contain !important;
     border: 2px solid #574c7c;
     background-position: center !important;
+    background-color: #574b7d !important;
+    background-repeat: no-repeat !important;
 }
 
 .grid-30, .grid-50, .grid-33 {
