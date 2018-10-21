@@ -245,6 +245,11 @@ namespace SpaceApps.Models.CleanData
         //public int Total { get; set; }
         //public string MissionID { get; set; }
 
+        public PayLoad()
+        {
+
+        }
+
         public PayLoad(SpaceApps.Models.RawData.Payload DirtyPayLoad)
         {
             CountryCodes = DirtyPayLoad.countyCodes;

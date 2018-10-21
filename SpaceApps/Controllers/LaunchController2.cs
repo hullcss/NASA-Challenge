@@ -40,7 +40,7 @@ namespace SpaceApps.Controllers
                     title = item.name,
                     start = item.WindowStart.ToString("O"),
                     allDay = false,
-                    url = $"/launch/grab/?id={item.id}",
+                    url = $"/Home/Launch?launchId={item.id}",
                 });
             }
 
