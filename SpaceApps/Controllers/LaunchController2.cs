@@ -34,14 +34,13 @@ namespace SpaceApps.Controllers
             List<Models.EventViewModel> events = new List<Models.EventViewModel>();
             foreach (var item in a)
             {
-                //"2018-10-021T20:00:10"
                 events.Add(new Models.EventViewModel
                 {   
                     id = item.id,
                     title = item.name,
                     start = item.WindowStart.ToString("O"),
-                    end = item.WindowEnd.ToString("O"),
-                    allDay = false
+                    allDay = false,
+                    url = $"/launch/grab/?id={item.id}",
                 });
             }
 
@@ -63,7 +62,7 @@ namespace SpaceApps.Controllers
         public async Task<IActionResult> Grab(int id)
         {
             var searchedObject = CleanDataLaunches.FirstOrDefault(x => x.id == id);
-            if (searchedObject == new Models.CleanData.MainLaunch(new Models.RawData.Launch()))
+            if (searchedObject == null)
             {
                 return NotFound("Id Not Found");
             }

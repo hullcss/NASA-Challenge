@@ -12,5 +12,7 @@ namespace SpaceApps.Models
             public String end { get; set; }
 
             public bool allDay { get; set; }
-        }
+
+            public String url { get; set; }
     }
+}
