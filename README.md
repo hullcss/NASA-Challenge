@@ -1,2 +1,4 @@
-NASA-Challenge
-https://docs.google.com/document/d/1Q_qMyc16ZTEDsfMPjf-Ld1VI4yDBxVBEtELiUT1ggB8/edit?usp=sharing
+<h1>NASA Challenge</h1>
+
+<a href="https://2018.spaceappschallenge.org/challenges/can-you-build/when-next-rocket-launch/teams/hullcss/project"> Find out more about this project on NASA's website</a>
+
