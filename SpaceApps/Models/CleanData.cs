@@ -41,7 +41,9 @@ namespace SpaceApps.Models.CleanData
         {
             id = DirtyLaunch.id;
             name = DirtyLaunch.name;
-            net = DateTime.Parse(DirtyLaunch.net.TrimEnd(new char[] { 'U', 'T', 'C' }));
+            net =Convert.ToDateTime(DirtyLaunch.net.TrimEnd(new char[] { 'U', 'T', 'C' }));
+            WindowStart = Convert.ToDateTime(DirtyLaunch.windowstart.TrimEnd(new char[] { 'U', 'T', 'C' }));
+            WindowEnd = Convert.ToDateTime(DirtyLaunch.windowend.TrimEnd(new char[] { 'U', 'T', 'C' }));
             WeStamp = DirtyLaunch.westamp;
             WsStamp = DirtyLaunch.wsstamp;
             NetStamp = DirtyLaunch.netstamp;
