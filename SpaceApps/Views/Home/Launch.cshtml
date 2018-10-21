@@ -13,23 +13,32 @@
     <div class="grid-33 mobile-grid-100">
         <div class="launchInfoHead">About</div>
         <div class="launchInfoContent">
-            <div class="launchState green"><i class="fas fa-calendar-check"></i>&nbsp; Ready to Launch</div>
-            <!--<div class="launchState red"><i class="fas fa-calendar-times"></i>&nbsp; Not Ready to Launch</div>
-            <div class="launchState success"><i class="fas fa-calendar-check"></i>&nbsp; Success</div>
-            <div class="launchState failure"><i class="fas fa-frown-open"></i>&nbsp; Failure</div>-->
+            @{ 
+                int launchStatus = Convert.ToInt32(Model.LaunchStatus);
+                switch(launchStatus)
+                {
+                    case 1:
+                        <div class="launchState green"><i class="fas fa-calendar-check"></i>&nbsp; Ready to Launch</div>
+                        break;
+                    case 2:
+                        <div class="launchState red"><i class="fas fa-calendar-times"></i>&nbsp; Not Ready to Launch</div>
+                        break;
+                    case 3:
+                        <div class="launchState success"><i class="fas fa-calendar-check"></i>&nbsp; Success</div>
+                        break;
+                    case 4:
+                        <div class="launchState failure"><i class="fas fa-frown-open"></i>&nbsp; Failure</div>
+                        break;
+
+                };
+            }
 
             <i class="fas fa-clock"></i> 30 Minutes til Launch<br />
             <i class="fas fa-calendar"></i> Thursday 3rd July 23:00 UTC<br />
 
         </div>
     </div>
-
-    @{ 
-        if (true)
-        {
-            <h1>Hello World</h1>
-        }
-    }
+   
 
     <div class="grid-33" >
         <div class="image" style="background:url(https://s3.amazonaws.com/launchlibrary/RocketImages/placeholder_1920.png);"></div>
