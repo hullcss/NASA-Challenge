@@ -107,9 +107,11 @@
 
     @{ if (@Model.Agency.InfoURLs != null)
         {
-            if (@Model.Agency.InfoURLs.Count() > 0)
+            if (@Model?.Agency?.InfoURLs != null)
             {
-                <div class="grid-33 mobile-grid-100">
+                if (@Model.Agency.InfoURLs.Count() >0)
+                {
+                    <div class="grid-33 mobile-grid-100">
                     <div class="launchInfoHead">Agency Links</div>
                     <div class="launchInfoContent">
 
@@ -130,7 +132,7 @@
                         }
                     </div>
                 </div>
-
+                    }
             }
         }
     }
